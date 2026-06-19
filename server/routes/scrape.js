@@ -1,13 +1,12 @@
 // ─── Scrape Route ─────────────────────────────────────────────────────────────
 // POST /api/scrape
 // Receives scraping parameters from the frontend,
-// calls the Python scraper, saves results to MongoDB.
+// calls the JavaScript scraper, saves results to MongoDB.
 
 const express = require("express");
 const router = express.Router();
-const { spawn } = require("child_process"); // used to run the Python script
-const path = require("path");
 const crypto = require("crypto");
+const { scrapePlatform } = require("../utils/scraper");
 
 const Lead = require("../models/Lead");
 const ScrapeHistory = require("../models/ScrapeHistory");
@@ -29,72 +28,19 @@ router.post("/", async (req, res) => {
       .json({ error: "platform, city, and category are required." });
   }
 
-  // Path to the Python scraper script
-  const pythonScript = path.join(
-    __dirname,
-    "../../python-scraper/scraper.py"
-  );
-
-  // Arguments passed to the Python script
-  const args = [platform, city, category];
-
-  let rawOutput = "";
-  let errorOutput = "";
-
-  // Spawn the Python process
-  // "python3" might need to be "python" on Windows — see README
-  const pythonProcess = spawn("python3", [pythonScript, ...args]);
-
-  // Collect stdout (the JSON data from the scraper)
-  pythonProcess.stdout.on("data", (data) => {
-    rawOutput += data.toString();
-  });
-
-  // Collect stderr (error messages or debug logs)
-  pythonProcess.stderr.on("data", (data) => {
-    errorOutput += data.toString();
-  });
-
-  // When the Python process finishes
-  pythonProcess.on("close", async (code) => {
-    if (code !== 0) {
-      // Python exited with an error
-      console.error("Python scraper error:", errorOutput);
-
-      await ScrapeHistory.create({
-        platform,
-        city,
-        category,
-        status: "error",
-        errorMessage: errorOutput || "Unknown error from Python scraper.",
-      });
-
-      return res.status(500).json({
-        error: "Scraping failed.",
-        details: errorOutput,
-      });
-    }
-
-    // Try to parse the JSON that Python returned
-    let leads = [];
-    try {
-      leads = JSON.parse(rawOutput);
-    } catch (parseError) {
-      console.error("Failed to parse Python output:", rawOutput);
-      return res
-        .status(500)
-        .json({ error: "Invalid JSON from scraper.", raw: rawOutput });
-    }
+  try {
+    // Call the JavaScript scraper
+    const leads = await scrapePlatform(platform, city, category);
 
     // Save each lead to MongoDB, skipping existing ones
     let savedCount = 0;
     for (const lead of leads) {
-      // Skip records with no business name (already filtered in Python too)
+      // Skip records with no business name
       if (!lead.businessName) continue;
 
       const hash = buildHash(lead.businessName, lead.phone || "");
 
-      // upsert=false means we skip if this hash already exists
+      // Check if this lead already exists
       const alreadyExists = await Lead.findOne({ uniqueHash: hash });
       if (alreadyExists) continue;
 
@@ -127,7 +73,22 @@ router.post("/", async (req, res) => {
       totalScraped: leads.length,
       newlySaved: savedCount,
     });
-  });
+  } catch (error) {
+    console.error("Scraping error:", error);
+
+    await ScrapeHistory.create({
+      platform,
+      city,
+      category,
+      status: "error",
+      errorMessage: error.message || "Unknown scraping error.",
+    });
+
+    return res.status(500).json({
+      error: "Scraping failed.",
+      details: error.message,
+    });
+  }
 });
 
 module.exports = router;

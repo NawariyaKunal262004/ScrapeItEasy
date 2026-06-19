@@ -19,7 +19,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
 app.use(express.json());
 
-// ── Routes ────────────────────────────────────────────────────────────────────
+// ── Serve static files from client/dist ────────────────────────────────────────
+const clientDistPath = path.join(__dirname, "../client/dist");
+app.use(express.static(clientDistPath));
+
+// ── API Routes ────────────────────────────────────────────────────────────────
 app.use("/api/leads", leadsRouter);
 app.use("/api/scrape", scrapeRouter);
 app.use("/api/export", exportRouter);
@@ -30,7 +34,13 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "ScrapeItEasy server is running." });
 });
 
+// ── Fallback to client for client-side routing ─────────────────────────────────
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
+});
+
 // ── Connect to MongoDB, then start server ─────────────────────────────────────
+console.log("Mongo URI:", process.env.MONGODB_URI);
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/scrapeiteasy")
   .then(() => {

@@ -1,0 +1,14 @@
+{
+  "name": "scrapeiteasy",
+  "version": "1.0.0",
+  "description": "Business lead scraper platform",
+  "private": true,
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run dev\"",
+    "start": "npm --prefix server start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
