@@ -7,6 +7,7 @@ function Navbar({ activePage, setActivePage }) {
     { key: "dashboard", label: "Scraper" },
     { key: "leads", label: "Leads" },
     { key: "history", label: "History" },
+    { key: "admin", label: "Admin" },
   ];
 
   return (

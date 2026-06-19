@@ -7,9 +7,10 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import Leads from "./pages/Leads";
 import History from "./pages/History";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
-  // "dashboard" | "leads" | "history"
+  // "dashboard" | "leads" | "history" | "admin"
   const [activePage, setActivePage] = useState("dashboard");
 
   return (
@@ -20,6 +21,7 @@ function App() {
         {activePage === "dashboard" && <Dashboard />}
         {activePage === "leads" && <Leads />}
         {activePage === "history" && <History />}
+        {activePage === "admin" && <AdminDashboard />}
       </main>
     </div>
   );
