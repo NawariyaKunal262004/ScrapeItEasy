@@ -11,6 +11,10 @@ const leadsRouter = require("./routes/leads");
 const scrapeRouter = require("./routes/scrape");
 const exportRouter = require("./routes/export");
 const historyRouter = require("./routes/history");
+const platformsRouter = require("./routes/platforms");
+const verificationRulesRouter = require("./routes/verification-rules");
+const organizationsRouter = require("./routes/organizations");
+const leadVerificationRouter = require("./routes/lead-verification");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,6 +32,10 @@ app.use("/api/leads", leadsRouter);
 app.use("/api/scrape", scrapeRouter);
 app.use("/api/export", exportRouter);
 app.use("/api/history", historyRouter);
+app.use("/api/platforms", platformsRouter);
+app.use("/api/verification-rules", verificationRulesRouter);
+app.use("/api/organizations", organizationsRouter);
+app.use("/api/lead-verification", leadVerificationRouter);
 
 // ── Health check ──────────────────────────────────────────────────────────────
 app.get("/api/health", (req, res) => {

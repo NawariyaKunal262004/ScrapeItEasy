@@ -1,0 +1,506 @@
+/* ─── Admin Dashboard Styles ─────────────────────────────────────────── */
+
+.admin-dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.admin-header p {
+  margin: 10px 0 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* ─── Tabs ───────────────────────────────────────────────────────────────── */
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 24px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.tab-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* ─── Admin Cards ────────────────────────────────────────────────────────────── */
+
+.admin-card {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.admin-card h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 22px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+.admin-card h3 {
+  margin: 0 0 15px 0;
+  color: #444;
+  font-size: 16px;
+}
+
+/* ─── Forms ──────────────────────────────────────────────────────────────── */
+
+.form-section {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border-left: 4px solid #007bff;
+}
+
+.admin-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.admin-form button {
+  grid-column: 1 / -1;
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.admin-form button:hover:not(:disabled) {
+  background: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.admin-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ─── Checkbox Group ─────────────────────────────────────────────────────────── */
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  grid-column: 1 / -1;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────────── */
+
+.platforms-list,
+.rules-list {
+  margin-top: 30px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.admin-table thead {
+  background: #f5f5f5;
+  border-bottom: 2px solid #ddd;
+}
+
+.admin-table th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.admin-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+/* ─── Badges ─────────────────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge-inactive {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────────── */
+
+.btn-toggle,
+.btn-delete,
+.btn-approve,
+.btn-reject {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: all 0.3s;
+}
+
+.btn-toggle {
+  background: #17a2b8;
+  color: white;
+}
+
+.btn-toggle:hover {
+  background: #138496;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+}
+
+.btn-approve {
+  background: #28a745;
+  color: white;
+}
+
+.btn-approve:hover {
+  background: #218838;
+}
+
+.btn-reject {
+  background: #ffc107;
+  color: #333;
+}
+
+.btn-reject:hover {
+  background: #e0a800;
+}
+
+/* ─── Stats Grid ─────────────────────────────────────────────────────────────── */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-box h3 {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+  color: white;
+}
+
+.stat-number {
+  margin: 10px 0 0 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.stat-box.verified {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-box.suspicious {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.stat-box.unverified {
+  background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+}
+
+/* ─── Filter Section ────────────────────────────────────────────────────────────── */
+
+.filter-section {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-section button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.filter-section button:hover {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.filter-section .filter-active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* ─── Status Badge ──────────────────────────────────────────────────────────── */
+
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.status-verified {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.status-suspicious {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status.status-unverified {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.status-pending {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+/* ─── Accuracy Bar ──────────────────────────────────────────────────────────── */
+
+.accuracy-bar {
+  position: relative;
+  height: 24px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accuracy-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #28a745, #20c997);
+  transition: width 0.3s;
+}
+
+.accuracy-bar span {
+  position: relative;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ─── Info Section ──────────────────────────────────────────────────────────────── */
+
+.admin-info {
+  background: #f0f4ff;
+  border-left: 4px solid #007bff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.admin-info h3 {
+  margin: 0 0 15px 0;
+  color: #007bff;
+}
+
+.admin-info ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.admin-info li {
+  padding: 8px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.admin-info strong {
+  color: #007bff;
+}
+
+/* ─── Organization Selector ────────────────────────────────────────────────────── */
+
+.org-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.org-selector input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.org-selector button {
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.org-selector button:hover {
+  background: #0056b3;
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 15px;
+  }
+
+  .admin-header h1 {
+    font-size: 20px;
+  }
+
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    width: 100%;
+  }
+
+  .admin-form {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .admin-table {
+    font-size: 12px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
+  }
+}
